@@ -17,6 +17,7 @@ App = {
       // Specify default instance if no web3 instance provided
       App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
       web3 = new Web3(App.web3Provider);
+
     }
     return App.initContract();
   },
@@ -343,13 +344,16 @@ App = {
       }
     })
   },
-
-
-  castTransaction: function() {
-    var transactionId = 14;
+  castTransaction: function(amount) {
     App.contracts.Document.deployed().then(function(instance) {
-
-      return instance.addTransaction(App.account,"0x0405bC3Da03730f78F568C8f9598e7263542ACa0",31,"Pay Slip 8","16/1/2018","Employee");
+      //0x228453300d0c9a0eb8b23efb66967952a90c3a8a
+      alert("Our Amount:"+amount*(100/115));
+      alert("SARS Amount:"+amount*(15/115));
+      instance.sendEther.sendTransaction("0x5771Ee1647165Ae93B1490200245E96d12994C0c", { from: App.account, value: (amount*(100/115))*1000000000000000000 });
+      instance.sendEther.sendTransaction("0xF8a278E1c1407D9C0926214eabD7fe6C197B08Cd", { from: App.account, value: (amount*(15/115))*1000000000000000000 });
+     
+      instance.addTransaction(App.account,"0xF8a278E1c1407D9C0926214eabD7fe6C197B08Cd",amount*(100/115),"Invoice 14","31/1/2018","Sale");
+      return instance.addTransaction(App.account,"0x5771Ee1647165Ae93B1490200245E96d12994C0c",amount*(15/115),"Invoice 14","31/1/2018","Sale");
     }).then(function(result) {
       // Wait for votes to update
       App.render();

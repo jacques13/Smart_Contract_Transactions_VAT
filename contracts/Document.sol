@@ -14,6 +14,9 @@ contract Document {
         string description;
     }
 
+    address SARS = 0xF8a278E1c1407D9C0926214eabD7fe6C197B08Cd;
+
+
     mapping(uint => Transaction) public transactions;
     uint public transactionCount;
 
@@ -43,6 +46,11 @@ contract Document {
         transactions[transactionCount] = Transaction(transactionCount,_DRAddress, _CRAddress, _amount,_document,_date,_description);
         emit SendTransactionEvent(transactionCount);
     }
+
+    function sendEther(address payable _addr) public payable {
+        _addr.transfer(msg.value);
+    }
+
 
    /* function vote (uint _candidateId) public {
         // require that they haven't voted before

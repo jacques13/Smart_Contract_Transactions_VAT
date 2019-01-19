@@ -57,7 +57,17 @@
 
       <a class="navbar-brand mr-1" href="index.html">Blockchain Example</a>
 
-
+		<ul class="navbar-nav ml-auto ml-md-0">
+			<li class="nav-item dropdown no-arrow mx-1">
+			  <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<i class="fa fa-plus" aria-hidden="true"></i>
+			  </a>
+			  <div class="dropdown-menu dropdown-menu-left" aria-labelledby="alertsDropdown">
+				<a class="dropdown-item addTrans" href="#">Add Sale</a>
+				
+			  </div>
+			</li>
+      </ul>
     </nav>
 
     <div id="wrapper">
@@ -73,7 +83,7 @@
             <li class="breadcrumb-item">
               <a href="#">Dashboard</a>
             </li>
-            <li class="breadcrumb-item">Overview</li>
+            <li class="breadcrumb-item" id="accountAddress">Overview</li>
           </ol>
 
           <!-- Icon Cards-->
@@ -240,44 +250,10 @@
       App.getTaxes();
       $("#Name").html("Taxes");
     });
-		/*$('body').on('click', '.employees', function (){
-			$.ajax({    
-			type: "GET",
-			url: "getEmployees.php",             
-			dataType: "html",                 
-			success: function(response){                    
-				$("#loadIn").html(response); 
-				$("#Name").html("Employees"); 
-			   
-				}
-			});
-		});
-		
-		$('body').on('click', '.sales', function (){
-			$.ajax({    
-			type: "GET",
-			url: "getSales.php",             
-			dataType: "html",                 
-			success: function(response){                    
-				$("#loadIn").html(response); 
-				$("#Name").html("Sales"); 
-			   
-				}
-			});
-		});
-		
-		$('body').on('click', '.purchases', function (){
-			$.ajax({    
-			type: "GET",
-			url: "getPurchases.php",             
-			dataType: "html",                 
-			success: function(response){                    
-				$("#loadIn").html(response); 
-				$("#Name").html("Purchases"); 
-			   
-				}
-			});
-		});*/
+    $('body').on('click', '.addTrans', function (){
+      var Amount = prompt("Please Enter Your Amount To Be Paid", "1");
+      App.castTransaction(Amount);
+    });
 	
 	});
 </script>
